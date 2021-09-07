@@ -1,0 +1,81 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+   .main{
+    width: 100%;
+    height: 100vh;
+   }
+   .title>p{
+    font-size: 150%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: center;
+   }
+   .sub_main{
+    display: flex;
+    width: 90%;
+    margin: 2% 5%;
+    height: auto;
+    justify-content: space-between;
+   }
+   .para{
+     flex: .35;
+   }
+  .para>h1{
+    font-size: 150%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 5%;
+  }
+  .para>p{
+    font-size: 120%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: justify;
+    margin: auto 2%;
+    text-transform: capitalize;
+
+  }
+  .form_div{
+    flex: .60;
+    height: auto;
+    box-shadow: 1px 1px 3px 1px black;
+    margin-bottom: 5%;
+  }
+  .form_div>p{
+    font-size: 150%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+    margin: auto 2%;
+  }
+  .form{
+    height: auto;
+  }
+  .form>fieldset{
+    margin: 2% 5%;
+  }
+  .form>fieldset>input{
+    width: 90%;
+    margin: 2% 5%;
+    height: 30px;
+  }
+  .btn{
+  position: relative;
+  bottom: -30%;
+  margin: 2% auto;
+  }
+  .btn>button{
+  width: 60%;
+  margin: auto 20%;
+  border: none;
+  color: white;
+  height: 25px;
+  background-color: #3466fc;
+  cursor: pointer;
+  transition: all .3s;
+  }
+.btn>button:hover, .btn>button:active, .btn>button:focus{
+    background-color: #000080;
+  }

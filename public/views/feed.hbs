@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/feed.css">
+</head>
+<body>
+    <div class="main">
+        
+        <div class="nav">
+            <div class="heading">
+                <p>Welcome To Admin Panel</p>
+            </div>
+            {{>n}}
+        </div>
+        <div class="head">
+            <h1>FEEDBACKS AND CONTACT REQUEST</h1>
+        </div>
+        <div class="main_data_div">
+            {{#each data}}
+                <div class="main_data">
+                    <div class="info">
+                        <p><b>SUBJECT: </b>{{this.sub}}</p>
+                        <p><b>EMAIL: </b>{{this.email}}</p>
+                    </div>
+                    <div class="mess">
+                        <p><b>MESSAGE: </b>{{this.message}}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</body>
+</html>

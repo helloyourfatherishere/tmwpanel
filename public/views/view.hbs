@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/proView.css">
+</head>
+<body>
+    <div class="main">
+        <div class="nav">
+            <div class="heading">
+                <p>Welcome To Admin Panel</p>
+            </div>
+            {{>n}}
+        </div>
+        <div class="sub_main">
+            <div class="card">
+                <div class="head">
+                    <img src="{{data.main_img.link}}" alt="">
+                    <p>{{data.title}}</p>
+                </div>
+                <div class="details">
+                    <p>ID: <span class="det">{{data._id}}</span></p>
+                    <p>PRICE <span class="det">{{data.price}}</span></p>
+                    <p>DISCOUNT PRICE<span class="det">{{data.cut_price}}</span></p>
+                    <p>SALE PRICE: <span class="det">{{data.sell_price}}</span></p>
+                    <p>DICOUNT STATUS: <span class="det">{{data.discount}}</span></p>
+                    <p>SELL STATUS: <span class="det">{{data.sell}}</span></p>
+                    <p>KEYWORDS: <span class="det">{{data.keywords}}</span></p>
+                    <p>DESCRIPTION: <span class="det">{{data.des}}</span></p>
+                    <p>NOTICE: <span class="det">{{data.note}}</span></p>
+                    <p>TABLE: <span class="det">{{data.table}}</span></p>
+                </div>
+                <div class="imgs">
+                    {{#each data.images}}
+                        <img src="{{this.link}}" alt="">
+                    {{/each}}
+                </div>
+                <div class="comments">
+                    <h1>COMMENTS:</h1>
+                    {{#each data.comments}}
+                    <p>{{this.name}}: <span class="comm">{{this.comment}}</span></p><hr>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

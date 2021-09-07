@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="/css/nav.css">
+
+</head>
+<body>
+    <button id="btn" class="fa fa-bars btn"></button>
+        <div class="side_main">
+            <div class="side">
+            <div class="cancel_div">
+                <button id="cancel_btn" class="fa fa-close cancel"></button>
+            </div>
+            <ul>
+                <a href="/"><li>Home</li></a>
+                <a href="/user"><li>Users</li></a>
+                <a href="/cart"><li>Carts</li></a>
+                <a href="/order/register"><li>Register Orders</li></a>
+                <a href="/order/unregister"><li>Unregistered Orders</li></a>
+                <a href="/process"><li>Process</li></a>
+                <a href="/delievered"><li>Delievered</li></a>
+                <a href="/poster"><li>Posters</li></a>
+                <a href="/feed"><li>Feed & Cont.</li></a>
+                <a href="/More"><li>More</li></a>
+            </ul>
+        </div>
+
+        </div>
+        <script>
+            let btn= document.querySelector("#btn");
+            function show(){
+                var side= document.querySelector(".side")
+                side.style.right="0"
+                side.style.width="300px"
+                side.style.height="auto"
+                side.style.display="block"
+            }
+            btn.addEventListener("click", show)
+
+            let cancel_btn= document.querySelector("#cancel_btn");
+            function hide(){
+                var side= document.querySelector(".side")
+                side.style.right="0"
+                side.style.width="0"
+                side.style.height="0"
+                side.style.display="none"
+            }
+            cancel_btn.addEventListener("click", hide)
+        </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/upload.css">
+</head>
+<body>
+  
+     <div class="main">
+        <div class="heading">
+            <h1>UPLOAD PRODUCT DETAILS</h1>
+        </div>
+        <div class="form_div">
+            <form action="/edit/{{dataObj.id}}" method="post">
+        <div class="detail_div">
+            Title:<input type="text" placeholder="title: men's black..." name="title" value="{{dataObj.title}}"><br>
+
+            PRICE: <input type="text" placeholder="price in $: $11..." name="price" value="{{dataObj.price}}"><br>
+            DISCOUNT PRICE: <input type="text" placeholder="price discount in $: $8..." name="cut_price" value="{{dataObj.cut_price}}"><br>
+            SALE PRICE :<input type="text" placeholder="sell price in $: $2..." name="sell_price" value="{{dataObj.sell_price}}"><br>
+
+            VISIBLITY: <b>"{{dataObj.visiblity}}"</b>
+            <label>Yes: <input type="radio" name="visiblity" value="true"></label>
+            <label>No: <input type="radio" name="visiblity" value="false"></label><br>
+            
+            DISCOUNT: <b>"{{dataObj.discount}}"</b>
+            <label>Yes: <input type="radio" name="discount" value="true"></label>
+            <label>No: <input type="radio" name="discount" value="false"></label><br>
+            
+            SALE:  <b>"{{dataObj.sell}}"</b>
+            <label>Yes: <input type="radio" name="sell" value="true"></label>
+            <label>No: <input type="radio" name="sell" value="false"></label><br>
+            
+            BRAND: <b>"{{dataObj.brand}}"</b>
+            <label>Yes: <input type="radio" name="brand" value="true"></label>
+            <label>No: <input type="radio" name="brand" value="false"></label><br>
+
+            BRAND NAME: <input type="text" placeholder="brand name: denim..." name="brand_name" value="{{dataObj.brand_name}}" id="brand_name"><br>
+
+            CATEGORY<select id="category" name="category" value={{dataObj.category}}>
+                <option value="pants">PANTS</option>
+                <option value="shirts">SHIRTS</option>
+                <option value="t-shirts">T-SHIRTS</option>
+                <option value="jackets">JACKETS</option>
+                <option value="hoodies">HOODDIES</option>
+                <option value="trouser">TROUSER</option>
+                <option value="shalwar-kameez">SHALWAR KAMEEZ</option>
+                <option value="ladies-kurti">LADIES KURTI</option>
+                <option value="collections">COLLECTION</option>
+                <option value="undergarments">UNDERGARMENTS</option>
+            </select><br>
+
+            TYPE <select id="type" name="type"  value={{dataObj.type}}>
+                <option value="men">MEN</option>
+                <option value="women">WOMEN</option>
+                </select><br>
+            AVAILABLE COLOURS: <input type="text" placeholder="available colors: red, gree, yellow," name="colors" value="{{dataObj.colors}}"><br>
+            
+            AVAILABLE SIZES: <input type="text" placeholder="available sizes: small, medium ,large" name="sizes" value="{{dataObj.sizes}}"><br>
+
+            SEARCH KEYWORDS: <input type="text" placeholder="search keywords: black pants" name="search_keyword" value={{dataObj.search_keyword}}><br>
+
+            KEYWORDS: <input type="text" placeholder="keywords: pant, black, brand,..." name="keywords" value="{{dataObj.keywords}}"><br>
+
+            TABLE: <input type="text" placeholder="table details: color: red, black, white; size: small ,medium ,large ;" name="table" value="{{dataObj.table}}"><br><br>
+
+            DESCRIPTION: <textarea type="text" placeholder="description: imporant things to know" name="des" value="{{dataObj.des}}" style="height: 100px;">{{dataObj.des}}</textarea><br><br>
+
+            NOTE: <textarea type="text" placeholder="note: Note! this is not..." name="note" value="{{dataObj.note}}" style="height: 150px;">{{dataObj.note}}</textarea><br><br>
+        </div>
+        <div class="btn">
+            <button type="submit">Upload</button>
+        </div>
+    </form>
+
+        </div>
+    </div>
+</body>
+</html>
+

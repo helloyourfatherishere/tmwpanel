@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <img src="{{data.main_img.link}}" alt="image">
+        <p>PRODUCT ID: {{data._id}}</p>
+        <p>TITLE: {{data.title}}</p>
+        <p>SIZES: {{data.sizes}}</p>
+        <p>COLOURS: {{data.colors}}</p>
+    </div>
+    <script>
+    var p= function(){
+ var is_chrome = function () { return Boolean(window.chrome); }
+ console.log(is_chrome);
+if(is_chrome) 
+{
+    window.print();
+   setTimeout(function(){window.close();}, 10000); 
+   //give them 10 seconds to print, then close
+}
+else
+{
+   window.print();
+   window.close();
+}
+    }
+    
+    setTimeout(p, 3);
+</script>
+    </body>
+</html>

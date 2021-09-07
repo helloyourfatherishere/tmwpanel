@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/link.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="main">
+        <div class="title">
+             <p>EXCHANGE LINK</p>
+        </div>
+        <div class="sub_main">
+            <div class="para">
+                <h1>PRECUATIONS:</h1>
+                <p>Exchange these links to <a href="https://gdurl.com" style="color: blue; text-decoratio: underlined; cursor: pointer;">https://gdurl.com</a>  after that click on <strong>create perma link</strong> and then copy the url now paste that here again and remove things from the last slahs</p>
+            </div>
+            <div class="form_div">
+                <form action="/link/{{id}}" method="post" class="form">
+                    {{#each data}}
+                        <fieldset class="order">
+                            <legend>IMAGE {{#index_plus @index}}{{/index_plus}}</legend>
+                            <input type="hidden" value={{this.id}} name="img{{@key}}">
+                            <input type="text" value={{this.link}} name="img{{@key}}">
+                        </fieldset>
+                    {{/each}}
+                        <div class="btn">
+                        <button type="submit">ADD TO DATABASE</button>
+                        </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

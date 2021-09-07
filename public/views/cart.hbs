@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/cart.css">
+    <link rel="stylesheet" href="/css/order.css">
+</head>
+<body>
+        <div class="nav">
+        <div class="heading">
+            <p>Welcome To Admin Panel</p>
+        </div>
+        {{>n}}
+    </div>
+    <h1 class="heading">USER'S CART</h1>
+
+    <div class="cards">
+    {{#each data}}    
+        <a href="http://localhost:3000/view/{{this.productId}}" style="color: black; text-decoration: none; display: inline-block;">
+        <div class="card">
+            <div class="user_id">
+            <p>USER ID: {{this.userId}}</p>
+            </div>
+            <div class="more">
+                <img src="{{this.img}}" alt="image">
+                <p>{{this.title}}</p>
+            </div>
+        </a>
+        </div>
+    {{/each}}
+    </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color:  #F0F0F0;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:  #3466fc;
+}
+.heading{
+    margin: auto 5%;
+}
+.heading>p{
+    color: white;
+    font-size: 2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+.search{
+    padding: .3%;
+    background-color: white;
+    margin-top: 1%;
+    border: .2px solid;
+}
+.main_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main_form>form>input{
+    width: 50vw;
+    height: 30px;
+    outline-width: 0;
+}
+.main_form>form>button{
+    width: 20vw;
+    height: 30px;
+    border: none;
+    color: white;
+    background-color: #3466fc;
+    transition: all .3s;
+    cursor: pointer;
+}
+.main_form>form>button:hover, .main_form>form>button:active{
+    background-color: #000080;
+}
+.table{
+    border: 1px solid black;
+    margin: 1% 1% ;
+    height: 80vh;
+    overflow: auto;
+    background-color: white;
+}
+table{
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -180px;
+}
+th{
+    border-bottom: 1px solid black;
+}
+td{
+    font-size: 85%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-bottom: 1px solid black;
+}

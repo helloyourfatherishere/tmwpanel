@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/user.css">
+    <style>
+    </style>
+</head>
+<body>
+        <div class="nav">
+        <div class="heading">
+            <p>Welcome To Admin Panel</p>
+        </div>
+        {{>n}}
+    </div>
+        <div class="search">
+            <div class="main_form">
+                <form action="/search/user" method="GET"> 
+                    <input type="search" name="search" id="search" placeholder="search user by user id" autocomplete="off">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+    </div>
+    <div class="table">
+        <table>
+        <tr>
+                <td align="center"><b>ID</b></td>
+                <td align="center"><b>NAME</b></td>
+                <td align="center"><b>LOGIN EMAIL</b></td>
+                <td align="center"><b>CONTACT EMAIL </b></td>
+                <td align="center"><b>PHONE NO</b></td>
+                <td align="center"><b>ADDRESS</b></td>
+                <td align="center"><b>CART</b></td>
+                <td align="center"><b>ORDER</b></td>
+                <td align="center"><b>RECIEVED</b></td>
+        </tr><br>
+        {{#each data}}
+            <tr>
+                <td align="center">{{this._id}}</td>
+                <td align="center">{{this.name}}</td>
+                <td align="center">{{this.email}}</td>
+                <td align="center">{{this.contact_email}}</td>
+                <td align="center">{{this.phone}}</td>
+                <td align="center">{{this.address}}</td>
+                <td align="center">{{this.cart.length}}</td>
+                <td align="center">{{this.order.length}}</td>
+                <td align="center">{{this.received.length}}</td>
+            </tr><br>
+        {{/each}}
+    </table>
+
+    </div>
+    
+</body>
+</html>

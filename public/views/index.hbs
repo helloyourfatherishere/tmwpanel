@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../node_modules/@fortawesome/fontawesome-free/css/all.css">
+    <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="nav">
+        <div class="heading">
+            <p>Welcome To Admin Panel</p>
+        </div>
+        {{>n}}
+    </div>
+        <div class="search">
+            <div class="main_form">
+                <form action="/search/product" method="GET"> 
+                    <input type="search" name="search" id="search" placeholder="search product by product id..." autocomplete="off">
+                    <button type="submit">Search</button>
+                </form>
+            </div>
+    </div>
+    <div class="main">
+    {{#each data}}
+        
+        <div class="card" >
+            <div class="sr">
+                <p>{{#index_plus @index}} {{/index_plus}}</p>
+            </div>
+            <div class="det">
+                <div class="img">
+                    <img src="{{this.main_img.link}} " alt="MAIN IMG" id={{this.main_img.id}}>
+                </div>
+                <div class="id">
+                    <p>{{this._id}}</p>
+                </div>
+                <div class="title">    
+                    <p>{{this.title}}</p>
+                </div>
+                <div class="price">
+                    <p>{{this.price}}</p>
+                </div>
+            </div>
+            <div class="more">
+            <a href="/edit/{{this._id}}" style="text-decoration: none;"><div class="pencil">&#9999;</div></a><br><br>
+            <a href="http://localhost:4000/view/{{this._id}}" style="text-decoration: none; font-size: 140%;"><div class="fa fa-external-link r"></div></a><br><br>
+            <form action="/view/{{this.id}}" method="get">
+                <button type="submit" class="trash"><i class="fa fa-envelope-o r"></i></button>
+            </form>
+            <form action="/delete/{{this.id}}" method="post">
+                <button type="submit" class="trash"><i class="fa fa-trash-o "></i></button>
+            </form>
+            </div>
+        </div>
+    {{/each}}
+    </div>
+    <div class="new_btn">
+        <a href="/upload" class="new"><i class="fa fa-plus plus"></i></a>
+    </div>
+</body>
+</html>

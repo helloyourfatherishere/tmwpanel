@@ -1,0 +1,222 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color:  #F0F0F0;
+}
+.main{
+    height: auto;
+}
+
+.card{
+    display: flex;
+    margin: .5% .5%;
+    border: .5px solid;
+    cursor: pointer;
+    justify-content: space-around;
+    transition: all .3s;
+    user-select: none;
+    background-color: white;
+    border: .5px solid black;
+}
+.card:hover{
+    background-color:  darkgray;
+    box-shadow: 1px 1px 3px 1px black;
+}
+.card:active{
+    box-shadow: 1px 1px 3px 1px #3466fc;
+}
+.sr{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    user-select: none;
+}
+.det{
+    flex: .60;
+    display: flex;
+    user-select: none;
+}
+.img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90px;
+    user-select: none;
+}
+.img>img{
+    width: 70px;
+    height: 60px;
+    user-select: none;
+    margin: 2% auto;
+}
+.id{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    width: 105px;
+    user-select: none;
+}
+
+.id>p{
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    user-select: none;
+
+}
+.title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5%;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    width: 200px;
+    user-select: none;
+}
+.title>p{
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-transform: capitalize;
+    user-select: none;
+}
+.price{
+    flex: .10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5%;
+    user-select: none;
+}
+.more{
+    flex: .20;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    user-select: none;
+}
+.pencil{
+    -ms-transform: rotate(140deg); 
+    transform: rotate(140deg); 
+    color: #3466fc;
+    font-size: 1.5rem;
+    text-transform: capitalize;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+}
+.pencil:hover, .pencil:active, .pencil:focus{
+    color: #000080;
+}
+.r{ 
+    color: #3466fc;
+    text-transform: capitalize;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+}
+.r:hover, .r:active, .r:focus{
+    color: #000080;
+}
+.trash{
+    border: none;
+    font-size: 1.5rem;
+    color: rgb(194, 0, 0);
+    background-color: transparent;
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+}
+.trash:hover{
+    color: red;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:  #3466fc;
+}
+.heading{
+    margin: auto 5%;
+}
+.heading>p{
+    color: white;
+    font-size: 2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+}
+.search{
+    padding: .3%;
+    background-color: white;
+    margin-top: 1%;
+    border: .2px solid;
+}
+.main_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.main_form>form>input{
+    width: 50vw;
+    height: 30px;
+    outline-width: 0;
+}
+.main_form>form>button{
+    width: 20vw;
+    height: 30px;
+    border: none;
+    color: white;
+    background-color: #3466fc;
+    transition: all .3s;
+    cursor: pointer;
+}
+.main_form>form>button:hover, .main_form>form>button:active{
+    background-color: #000080;
+}
+.new_btn{
+    width: 80px;
+    height: 80px;
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+}
+.new{
+    border: 1px solid blue;
+    display: flex;
+    height: 80px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: #3466fc;
+    cursor: pointer;
+    transition: all .3s;
+    text-decoration: none;
+}
+.new:hover, .new:active, .new:focus{
+    background-color: #000080;
+}
+.plus{
+    color: white;
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/userView.css">
+</head>
+<body>
+
+    <div class="main">
+    <div class="nav">
+        <div class="heading">
+            <p>Welcome To Admin Panel</p>
+        </div>
+        {{>n}}
+    </div>
+        <div class="sub_main">
+            <div class="card">
+                        <p>ID: <span class="det">{{data._id}}</span></p>
+                        <p>NAME: <span class="det">{{data.name}}</span></p>
+                        <p>EMAIL: <span class="det">{{data.email}}</span></p>
+                        <p>CONTACT EMAIL: <span class="det">{{data.contact_email}}</span></p>
+                        <p>PHONE NO: <span class="det">{{data.phone}}</span></p>
+                        <p>Address: <span class="det">{{data.address}}</span></p>
+                        <p>CARTED PRODUCTS: <span class="det">{{data.cart.length}}</span></p>
+                        <p>ORDERED PRODUCTS: <span class="det">{{data.order.length}}</span></p>
+                        <p>RECIEVED PRODUCTS: <span class="det">{{data.received.length}}</span></p>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

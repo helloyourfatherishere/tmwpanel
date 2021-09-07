@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/print.css">
+</head>
+<body>  
+        <div class="cards">
+       {{#each data.orderDetails}} 
+       <div class="card">
+           <div class="img">
+                <img src="{{this.img}}" alt="IMAGE">
+           </div>
+           <div class="det">
+            <p>PRODUCT ID: <span class="detail">{{this.id}}</span></p>
+            <p>QUANTITY: <span class="detail">{{this.quantity}}</span></p>
+            <p>COLORS: <span class="detail">{{this.colors}}</span></p>
+            <p>SIZES: <span class="detail">{{this.sizes}}</span></p>
+            <p>PRICE: <span class="detail">{{this.price}}</span></p>
+            <p>TOTAL PRICE: <span class="detail">{{#total this.price  this.quantity}}{{/total}}</span></p>
+           </div>
+       </div>
+        {{/each}}
+
+        <hr>
+        <div class="det"><p>ORDER ID: <span class="detail2">{{data._id}}</span></p>
+        <p>NAME: <span class="detail2">{{data.userDetails.name}}</span></p>
+        <p>EMAIL: <span class="detail2">{{data.userDetails.email}}</span></p>
+        <p>PHONE NO: <span class="detail2">{{data.userDetails.phone}}</span></p>
+        <p>WHATSAPP NO : <span class="detail2">{{data.userDetails.whatsapp}}</span></p>
+        <p> ADDRESS: <span class="detail2">{{data.userDetails.address}}</span></p>
+        <p>ORDER QUANTITY: <span class="detail2">{{data.orderDetails.length}}</span></p>
+        <p>TOTAL PRICE: _____________________</p><br>
+        <p>DELIEVERED: <input type="checkbox"></p>
+        <p>RECIEVED BY: ____________________</p>  <p align="right">SIGNATURE: ____________________</p>
+        </div>
+        
+<script>
+    var p= function(){
+ var is_chrome = function () { return Boolean(window.chrome); }
+ console.log(is_chrome);
+if(is_chrome) 
+{
+    window.print();
+   setTimeout(function(){window.close();}, 10000); 
+   //give them 10 seconds to print, then close
+}
+else
+{
+   window.print();
+   window.close();
+}
+    }
+    
+    setTimeout(p, 3);
+</script>
+</body>
+</html>

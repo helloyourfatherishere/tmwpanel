@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/order.css">
+</head>
+<body>
+    <div class="nav">
+        <div class="heading">
+            <p>Welcome To Admin Panel</p>
+        </div>
+        {{>n}}
+    </div>
+    <h1 class="heading">DELIEVERED ORDERS</h1>
+    <div class="search">
+        <div class="main_form">
+            <form action="/search/delievered" method="GET"> 
+                <input type="search" name="search" id="search" placeholder="search orders by order's id..." autocomplete="off">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="cards_order">
+        {{#each data}}
+    <a href="/delievered/view/{{this._id}}" style="color: black; text-decoration: none; display: inline-block;" >
+    <div class="card_order">
+    <p class="p">ORDER ID: <span class="det">{{this._id}}</span></p>
+    <p class="p">NAME: <span class="det">{{this.userDetails.name}}</span></p>
+    <p class="p">PHONE NO: <span class="det">{{this.userDetails.phone}}</span></p>
+    <p class="p">EMAIL ADDRESS: <span class="det">{{this.userDetails.email}}</span></p>
+    <p class="p">ADDRESS: <span class="det">{{this.userDetails.address}}</span></p>
+    <p class="p">ORDER QUANTITY: <span class="det">{{this.orderDetails.length}}</span></p>
+    </div>
+    </a>
+    {{/each}}
+    </div>
+</body>
+</html>

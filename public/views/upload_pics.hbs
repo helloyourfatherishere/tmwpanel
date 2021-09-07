@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/upload_pics.css">
+</head>
+<body>
+       <div class="main">
+       <div class="title">
+           <h1>UPLOAD DETAILS</h1>
+       </div>
+       <div class="sub_main">
+        <div class="para">
+          <h1>PRECUATIONS</h1>
+           <p>upload 1-9 pictures at the same time and the fitsrt one you choose gonna be title image...<br><br><strong>Thanks</strong></strong></p>
+        </div>
+        <div class="form_div">
+          <p>Choose pic</p>
+         <form action="/upload_pics/{{id}}" method="post" enctype="multipart/form-data" class="form">
+         <input type="file" name="file" multiple="multiple"/>
+         <div class="btn">
+          <button type="submit">Upload</button>
+         </div>
+         </form>
+        </div>
+
+       </div>
+     </div>
+</body>
+</html>

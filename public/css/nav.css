@@ -1,0 +1,83 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.side_main{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    overflow-x: none;
+}
+.cancel{
+    position: relative;
+    left: 10%;
+    top: 10px;
+    font-size: 1.5rem;
+    border: none;
+    background-color: transparent;
+    color: rgb(184, 8, 8);
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    transition: all .3s;
+}
+.cancel:hover, .cancel:active{
+    color: red;
+}
+.side{
+    width: 300px;
+    height: auto;
+    max-height: auto;
+    background-color: #F0F0F0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: all .3s;
+    display: none;
+    z-index: 12;
+    clear: both;
+    height: 100vh;
+}
+.side>ul>a{
+    text-decoration: none;
+    color: black;
+    display: block;
+    text-align: justify;
+    margin: 2.5% 7%;
+    transition: all .3s;
+    padding: 5%;
+}
+.side>ul>a:hover{
+    background-color: #DCDCDC;
+}
+.side>ul>a>li{
+    list-style: none;
+    font-size: 1.1rem;
+    border-bottom: .5px solid #F0F0F0;
+}
+#btn:hover body{
+    background-color: red;
+}
+.btn{
+    font-size: 2rem;
+    border: none;
+    background-color: transparent;
+    color: white;
+    padding-top: .5%;
+    padding-bottom: .5%;
+    padding-left: .5%;
+    padding-right: .5%;
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    transition: all .3s;
+    margin: auto 5%;
+}
+.btn:hover{
+    background-color: 	#000080;
+}
+.btn:active{
+    background-color: 	#000080;
+}

@@ -1,0 +1,112 @@
+{{!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>ORDER ID: {{data._id}}</p>
+    <p>USER NAME: {{data.userDetails.name}}</p>
+    <p>USER PHONE NO: {{data.userDetails.email}}</p>
+    <p>USER PHONE NO: {{data.userDetails.phone}}</p>
+    <p>USER PHONE NO: {{data.userDetails.whatsapp}}</p>
+    <p>USER PHONE NO: {{data.userDetails.address}}</p>
+    <p>PAYMENT METHOD: {{data.paymentMethod}}</p>
+    <p>ORDER QUANTITY: {{data.orderDetails.length}}</p>
+
+        {{#each data.orderDetails}}            
+        <a href="http://localhost:3000/view/{{this.id}}">
+            <img src="{{this.img}}" alt="IMAGE">
+            <p>{{this.title}}</p></a>
+            <p>PRODUCT ID: {{this.id}}</p>
+            <p>QUANTITY: {{this.quantity}}</p>
+            <p>COLORS: {{this.colors}}</p>
+            <p>SIZES: {{this.sizes}}</p>
+            <p>MESSAGE: {{this.message}}</p>
+            <hr>
+        {{/each}}
+
+        <form action="/delievered/{{data._id}}" method="post">
+        <button type="submit">DELIEVERED</button></form>
+</body>
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/viewOrder.css">
+</head>
+<body>
+    <div class="nav">
+        <div class="heading">
+            <p>Welcome To Admin Panel</p>
+        </div>
+        {{>n}}
+    </div>
+
+    <h1 class="heading">VIEW ORDER</h1>
+        <div class="main">
+            <div id="user">
+                <fieldset class="user">
+                    <legend>User Details</legend>
+                <div class="sec1">
+                <p>ORDER ID: <span class="det">{{data._id}}</span></p>
+                <p>USER ID: <span class="det">{{data.userDetails.id}}</span></p>
+                <p>USER NAME<span class="det">{{data.userDetails.name}}</span></p>
+                <p>USER EMAIL: <span class="det">{{data.userDetails.email}}</span></p>
+                <p>USER PHONE NO:<span class="det">{{data.userDetails.phone}}</span></p>
+                <p>USER WHATSAPP NO: <span class="det">{{data.userDetails.whatsapp}}</span></p>
+                <p>USER ADDRESS: <span class="det">{{data.userDetails.address}}</span></p>
+                <p>PAYMENT METHOD: <span class="det">{{data.paymentMethod}}</span></p>
+                </div>
+                <div class="sec2">
+                <p>USER'S MESSAGE <span class="det">{{data.userDetails.message}}</span></p>
+                </div>
+                </fieldset>
+
+            </div>
+            <div id="orders">
+                <fieldset class="orders">
+                    <legend>Order Details</legend>
+                    {{#each data.orderDetails}}
+                    <a href="http://localhost:3000/view/{{this.id}}" style="color: black; text-decoration: none;">
+                        <div class="order">
+                            <div class="img">
+                                <img src="{{this.img}}" alt="image">
+                                <p>{{this.title}}</p>
+                            </div>
+                            <div class="details">
+                                <div class="sub_det">
+                                <p>COLORS: <span class="detail">{{this.colors}}</span></p>
+                                <p>SIZE: <span class="detail">{{this.sizes}}</span></p>
+                                </div>
+                                <div class="sub_det">
+                                <p>PRICE: <span class="detail">{{this.price}}</span></p>
+                                <p>QUANTITY: <span class="detail">{{this.quantity}}</span></p>
+                                </div>
+                            </div>
+                            <div class="total">
+                                    <p>TOTAL: <span class="detail">{{#total this.price  this.quantity}}{{/total}}</span></p>
+                                </div>
+                        </div>
+                    </a>
+                 {{/each}}
+                </fieldset>
+                
+            </div>
+            
+            <div class="btn_div">
+                <form action="/delievered/{{data._id}}" method="post">
+                    <button type="submit" class="submit_btn" >DELIVER</button>
+                </form>
+            </div>
+        </div>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.card{
+    box-shadow: 1px 1px 3px 1px black;
+    background-color: white;
+    cursor: pointer;
+    transition: all .3s;
+    margin: auto 2%;
+}
+.card:hover{
+    background-color:  rgb(223, 223, 223);
+}
+.card:active{
+    box-shadow: 1px 1px 3px 1px #3466fc;
+}
+.user_id>p{
+    font-size: 110%;
+    margin: auto 2%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.more{
+    display: flex;
+    padding: .5% 2%;
+    width: 80vw;
+}
+.more>img{
+    width: 100px;
+    height: 110px;
+}
+.more>p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 110%;
+    position: relative;
+    top: 20px;
+}

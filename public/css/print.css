@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .main{
+    width: 100%;
+    height: auto;
+  }
+  .cards{
+    width: 100%;
+    height: auto;
+  }
+  .card{
+    display: flex;
+    border: 1px solid;
+    margin: 1% 2%;
+  }
+  .img{
+    flex: .25;
+  }
+  .img>img{
+    width: 200px;
+    height: 220px;
+    margin: 2%;
+  }
+  .det{
+    flex: .75;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: justify;
+  }
+  .det>p{
+    font-size: 110%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    margin: .5% 2%;
+  }
+  .detail{
+    font-weight: normal;
+  }
+  
+  .det2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: justify;
+    border: 1px solid red;
+  }
+  .det2>p{
+    font-size: 110%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    margin: .5% 2%;
+  }
+  .detail2{
+    font-weight: normal;
+  }
+  hr{
+    border: .5px dashed;
+    margin: auto 1%;
+  }

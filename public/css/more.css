@@ -1,0 +1,45 @@
+body{
+    font-size: 120%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.detail_div{
+    border: 5px solid red;
+    width: 70%;
+    height: 70vh;
+    margin: auto 15%;
+    border: .5px solid;
+    background-color: white;
+    box-shadow: 1px 1px 5px 2px black;
+    padding: 2%;
+}
+.input{
+    width: 70%;
+    margin: 2% auto;
+}
+.label{
+    margin: 2% auto;
+    position: relative;
+    left: 5%;
+    cursor: pointer;
+}
+.btn{
+    width: 60%;
+    margin: 5% 20%;
+    border: none;
+    color: white;
+    height: 25px;
+    background-color: #3466fc;
+    cursor: pointer;
+    transition: all .3s;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 100%;
+}
+.btn:hover, .btn:active{
+    background-color: #000080;
+}
+.head{
+    text-align: center;
+    font-size: 150%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
