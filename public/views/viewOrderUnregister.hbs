@@ -35,6 +35,7 @@
                 </div>
                 <div class="sec2">
                     <p>USER''S MESSAGE {{data.message}}</p>
+                    {{data}}
                 </div>
             </fieldset>
 
@@ -74,6 +75,17 @@
             </div>
         </div>
     </div>
-        
+        <a href="http://localhost:3000/view/{{this.id}}">
+            <img src="{{data.img}}" alt="image">
+            <p>{{data.title}}</p>
+        </a>
+        <p>PRICE: {{data.price}}</p>
+        <p>QUANTITY: {{data.quantity}}</p>
+        <p>COLORS: {{data.colors}}</p>
+        <p>SIZE: {{data.size}}</p>
+
+        <form action="/procress/unregister/{{data._id}}" method="post">
+            <button type="submit">DELIVER</button>
+        </form>
 </body>
 </html>

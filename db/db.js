@@ -1,7 +1,6 @@
 var mongoose= require("mongoose");
-var db="mongodb+srv://ecomm:webworkfirst@cluster0.dhd9e.mongodb.net/db?retryWrites=true&w=majority"
 
-mongoose.connect(db,
+mongoose.connect("mongodb://localhost:27017/db",
     {useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

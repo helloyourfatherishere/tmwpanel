@@ -5,26 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-     <link rel="stylesheet" href="/css/more.css">
 </head>
 <body>
-    <h1 class="head">SETTINGS</h1>
+    <h1>SETTINGS</h1>
     <form action="/more" method="post">
     <div class="detail_div">
 
-        DISCOUNT: <b>"{{data.discount}}"</b>
-        <label class="label">Yes: <input type="radio" name="discount" value="true"></label>
-        <label class="label">No: <input type="radio" name="discount" value="false"></label><br>
+        DISCOUNT: {{data.discount}}
+        <label>Yes: <input type="radio" name="discount" value="true"></label>
+        <label>No: <input type="radio" name="discount" value="false"></label><br>
         
-        Sell: <b>"{{data.sell}}"</b>
-        <label class="label">Yes: <input type="radio" name="sell" value="true"></label>
-        <label class="label">No: <input type="radio" name="sell" value="false"></label><br>
+        Sell: {{data.sell}}
+        <label>Yes: <input type="radio" name="sell" value="true"></label>
+        <label>No: <input type="radio" name="sell" value="false"></label><br>
 
         Add Categories:
-        <input type="text" name="cate" placeholder="add categories" value="{{data.cate}}" class="input"><br>
+        <input type="text" name="cate" placeholder="add categories" value="{{data.cate}}"><br>
         Add Brands:
-        <input type="text" name="brand" placeholder="add brands" value="{{data.brand}}" class="input"><br>
-        <button type="submit" class="btn">Upload</button>
+        <input type="text" name="brand" placeholder="add brands" value="{{data.brand}}"><br>
+        <button type="submit">Upload</button>
         </div>
     </form>
 </body>

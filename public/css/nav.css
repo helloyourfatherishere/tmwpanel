@@ -38,14 +38,17 @@
     display: none;
     z-index: 12;
     clear: both;
-    height: 100vh;
+}
+.sid>ul{
+    display: flex;
+    justify-content: center;
 }
 .side>ul>a{
     text-decoration: none;
     color: black;
     display: block;
     text-align: justify;
-    margin: 2.5% 7%;
+    margin: 5% 7%;
     transition: all .3s;
     padding: 5%;
 }

@@ -3,14 +3,12 @@ var express =require("express");
 var app = express();
 var bodyParser= require("body-parser");
 var multer = require("multer");
-var port= process.env.PORT || 1000;
+var port= 1000 || process.env.PORT;
 var hbs = require("hbs")
 var path = require("path");
 var fs = require("fs");
 var { google }= require("googleapis");
-const cors = require('cors');
 require("dotenv").config();
-var credentials= require("./credentials.json")
 //DB THINGS 
 require("./db/db");
 var product = require("./public/models/product.js");
@@ -21,13 +19,11 @@ var orderUnregisterDB= require("./public/models/orderUnregister.js")
 var processDB=require("./public/models/process.js")
 var delieveredDB=require("./public/models/delievered.js");
 var main= require("./public/models/main.js");
-var feed= require("./public/models/feed.js");
 //LOCAL VARIABLES
 var public_path= path.join(__dirname,"/public/views")
 var partials_path= path.join(__dirname,"/public/partial")
 var views_path= path.join(__dirname,"/public/views")
 //SET MIDDLEWARE
-app.use(cors());
 app.use(express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
@@ -59,6 +55,11 @@ var upload_pics= multer({
 var upload_poster= multer({
     storage: Storage
 }).array("file_upload", 7);
+
+    function a(){
+        console.log("ABC")
+    };
+    a();
 
     //UPLOAD PIC 
 var CLIENT_ID= process.env.CLIENT_ID;
@@ -129,6 +130,7 @@ app.post("/upload", (req, res)=>{
     async function upload(){
         try{
             console.log("REACHED");
+            let tab = table.split(";");
             let t= title.toLowerCase();
             let d= des.toLowerCase();
             let n= note.toLowerCase();
@@ -169,71 +171,64 @@ app.post("/upload", (req, res)=>{
 
 app.post("/upload_pics/:id",upload_pics,  (req, res)=>{
     var upload =  async function(arr){       
-        try{
-            var pics= req.files;
-            for (var i=0; i<pics.length; i++){
+        var pics= req.files;
+        for (var i=0; i<pics.length; i++){
+            try{
+            var uploadAndView= async function(){
                 try{
-                var uploadAndView= async function(){
-                    try{
-                        //UPLOADING TO GOOGLE DRIVE
-                    var filePath= path.join(__dirname,pics[i].path);
-                    console.log(filePath)
-                    var response = await drive.files.create({
-                        requestBody:{
-                            name: pics[i].originalname,
-                            mimeType: pics[i].mimeType
-                        },
-                        media: {
-                            mimeType: pics[i].mimeType,
-                            body: fs.createReadStream(filePath)
-                        }
-                    });
-                    var response_data= response.data;
-                    console.log(response)
-                    var fileId= response_data.id;
-                    //GENERATING VIEW LINK INTO GOOGLE DRIVE
-                    await drive.permissions.create({
-                        fileId: fileId,
-                        requestBody:{
-                            role: "reader",
-                            type: "anyone"
-                        }
-                    })
-    
-                    var result= await drive.files.get({
-                        fileId: fileId,
-                        fields: "webViewLink, webContentLink"
-                    })
-                    var obj={
-                        id: fileId,
-                        link: result.data.webViewLink
-                    };
-                    var detail= arr=arr.concat(obj);
-                    //DELETING UPLOADED FILE FROM SERVER NOT FROM GOOGLE DRIVE
-                    fs.unlink(filePath,()=>{console.log("file deleted")})
-                    console.log(`I: ${i}, pics: ${pics.length}`)
-                    if(detail.length==pics.length){
-                        //SENDING TO CHANGE URL TO VIEW URL
-                        res.render("link", {data: detail, id: req.params.id});
-                        res.status(201).header(201).setHeader(201);
-                    }   
-                        
+                    //UPLOADING TO GOOGLE DRIVE
+                var filePath= path.join(__dirname,pics[i].path);
+                console.log(filePath)
+                var response = await drive.files.create({
+                    requestBody:{
+                        name: pics[i].originalname,
+                        mimeType: pics[i].mimeType
+                    },
+                    media: {
+                        mimeType: pics[i].mimeType,
+                        body: fs.createReadStream(filePath)
                     }
-                    catch{
-                        (e)=>{console.log(e)}
+                });
+                var response_data= response.data;
+                console.log(response)
+                var fileId= response_data.id;
+                //GENERATING VIEW LINK INTO GOOGLE DRIVE
+                await drive.permissions.create({
+                    fileId: fileId,
+                    requestBody:{
+                        role: "reader",
+                        type: "anyone"
                     }
+                })
+
+                var result= await drive.files.get({
+                    fileId: fileId,
+                    fields: "webViewLink, webContentLink"
+                })
+                var obj={
+                    id: fileId,
+                    link: result.data.webViewLink
                 };
-                        uploadAndView();
-                 }
-                 catch(e){
-                     console.log(e)
-                    }
-            }
-        }
-        catch{
-            (e)=>{
-                console.log(e)
-            }
+                var detail= arr=arr.concat(obj);
+                //DELETING UPLOADED FILE FROM SERVER NOT FROM GOOGLE DRIVE
+                fs.unlink(filePath,()=>{console.log("file deleted")})
+                console.log(`I: ${i}, pics: ${pics.length}`)
+                if(detail.length==pics.length){
+                    //SENDING TO CHANGE URL TO VIEW URL
+                    res.render("link", {data: detail, id: req.params.id});
+                    res.status(201).header(201).setHeader(201);
+                }   
+                    
+                }
+                catch{
+                    (e)=>{console.log(e)}
+                }
+            };
+                    uploadAndView();
+             }
+             catch(e){
+                 console.log(e)
+                }
         }
     };
     upload([]);
@@ -273,8 +268,7 @@ app.get("/poster", (req, res)=>{
 
 app.post("/poster", upload_poster ,(req, res)=>{
     var upload_poster =  async function(arr){       
-        try{
-            var pics= req.files;
+        var pics= req.files;
         console.log(pics)
         for (let j=0; j<pics.length; j++){
             try{
@@ -334,10 +328,6 @@ app.post("/poster", upload_poster ,(req, res)=>{
              catch(e){
                  console.log(e)
                 }
-        }
-        }
-        catch{
-            (e)=>{console.log(e)}
         }
     };
     upload_poster([]);
@@ -526,13 +516,9 @@ app.post("/delete/:id", (req, res)=>{
             else if(images.length<=0){
                 console.log("REACHED");
                 var dataDeleteWithoutPic = async function(){
-                    try{
                     var findDelData= await product.findOneAndRemove({_id: req.params.id}, {new: true});
+                    console.log(findDelData);
                     res.redirect("/");
-                    }
-                    catch{
-                        (e)=>{console.log(e)}
-                    }
                 };
                 dataDeleteWithoutPic();
             }
@@ -546,15 +532,10 @@ app.post("/delete/:id", (req, res)=>{
 
 app.get("/user", (req, res)=>{
     var findUser= async function(){
-        try{
-            var userFind= await user.find({});
-            res.render("user", {
-                data: userFind
-            })
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
+        var userFind= await user.find({});
+        res.render("user", {
+            data: userFind
+        })
     };
     findUser();
 })
@@ -607,19 +588,15 @@ app.get("/order/register", (req, res)=>{
 
 app.get("/orderRegiester/view/:id", (req, res)=>{
     var FindOrderById= async function(){
-        try{
-            let id= req.params.id;
+        let id= req.params.id;
         let find= await orderDB.findOne({_id: id});
         res.render("viewOrder", {
             data: find
         })
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
     };FindOrderById();
 });
 app.get("/order/unregister", (req, res)=>{
+    console.log(req.body)
     var findUnregister= async function(){
         try{
             let find=await orderUnregisterDB.find().sort({date: -1});
@@ -652,10 +629,13 @@ app.post("/procress/register/:id", (req, res)=>{
     var findOrderAndProcess= async function(){
         let i=req.params.id;
         let id= i.toString()
+        console.log(id)
         try{    
+            console.log("REACHED1")
             let findOrder= await orderDB.findByIdAndRemove({_id: id},{
                 new: true, useFindAndModify: false
             });
+            console.log(findOrder)
             let process= new processDB({
                 _id: findOrder._id,
                 userId: findOrder.userId,
@@ -664,12 +644,14 @@ app.post("/procress/register/:id", (req, res)=>{
                 orderDetails: findOrder.orderDetails,
             });
             let findUser= await user.findOne({_id:findOrder.userId})
+            console.log(findUser)
             let order= findUser.order
             console.log(order)
             let a=order.filter((val, i)=>{
                 return(val!= id)
             })
             let bc= findUser.order= a;
+            console.log(bc)
             let b= await findUser.save()
             let save= await process.save();
             res.render("delieveredPrint", {
@@ -854,15 +836,10 @@ app.get("/search/:category/",(req,res)=>{
     let key=req.query.search;
     if(cate=="product"){
         let fp= async function(){
-            try{
-                let find= await product.find({_id: key});
+            let find= await product.find({_id: key});
             res.render("index", {
                 data: find
             })
-            }
-            catch{
-                (e)=>{console.log(e)}
-            }
         };
         fp();
     }
@@ -876,54 +853,34 @@ app.get("/search/:category/",(req,res)=>{
         fpr();
     }   else if(cate=="orderRegister"){
         let fpr= async function(){
-            try{
-                let find= await orderDB.find({_id: key});
-                res.render("orderRegister", {
-                    data: find
-                })
-            }
-            catch{
-                (e)=>{console.log(e)}
-            }
+            let find= await orderDB.find({_id: key});
+            res.render("orderRegister", {
+                data: find
+            })
         };
         fpr();
     }   else if(cate=="orderUnregister"){
         let fpr= async function(){
-            try{
-                let find= await orderUnregisterDB.find({_id: key});
+            let find= await orderUnregisterDB.find({_id: key});
             res.render("orderUnregister", {
                 data: find
             })
-            }
-            catch{
-                (e)=>{console.log(e)}
-            }
         };
         fpr();
     }   else if(cate=="delievered"){
         let fpr= async function(){
-            try{
-                let find= await delieveredDB.find({_id: key});
+            let find= await delieveredDB.find({_id: key});
             res.render("delievered", {
                 data: find
             })
-            }
-            catch{
-                (e)=>{console.log(e)}
-            }
         };
         fpr();
     }   else if(cate=="user"){
         let fpr= async function(){
-           try{ 
             let find= await user.find({_id: key});
             res.render("userView", {
                 data: find
             })
-           }
-           catch{
-               (e)=>{console.log(e)}
-           }
         };
         fpr();
     }
@@ -971,20 +928,6 @@ app.post("/remove/:cate/:id", (req, res)=>{
         };
         justRemove();
     }
-});
-app.get("/feed", (req, res)=>{
-    var findFeed= async function(){
-        try{
-            let data= await feed.find();
-            res.render("feed", {
-                data: data
-            })
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findFeed();
 })
 //LISTENING APP
 app.listen(port, ()=>{

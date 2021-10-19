@@ -43,10 +43,6 @@
     cursor: pointer;
     transition: all .3s;
 }
-.btn>button:hover, .btn>button:active{
+.btn>button:hover, .btn>button:active, .btn>button:focus{
     background-color: #000080;
-}
-textarea{
-    width: 70%;
-    height: auto;
 }
