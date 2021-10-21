@@ -189,6 +189,7 @@ app.post("/upload_pics/:id",upload_pics,  (req, res)=>{
                         body: fs.createReadStream(filePath)
                     }
                 });
+                console.log(response)
                 var response_data= response.data;
                 console.log(response)
                 var fileId= response_data.id;
