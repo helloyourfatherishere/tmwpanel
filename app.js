@@ -9,6 +9,7 @@ var path = require("path");
 var fs = require("fs");
 var { google }= require("googleapis");
 require("dotenv").config();
+var cookieParser = require("cookie-parser");
 //DB THINGS 
 require("./db/db");
 var product = require("./public/models/product.js");
@@ -19,14 +20,19 @@ var orderUnregisterDB= require("./public/models/orderUnregister.js")
 var processDB=require("./public/models/process.js")
 var delieveredDB=require("./public/models/delievered.js");
 var main= require("./public/models/main.js");
+
+
 //LOCAL VARIABLES
 var public_path= path.join(__dirname,"/public/views")
 var partials_path= path.join(__dirname,"/public/partial")
 var views_path= path.join(__dirname,"/public/views")
+
+
 //SET MIDDLEWARE
 app.use(express.static(path.join(__dirname,"public")));
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(express.urlencoded({extended: false}))
 app.use(express.json());
 hbs.registerPartials(partials_path)
@@ -929,6 +935,33 @@ app.post("/remove/:cate/:id", (req, res)=>{
         };
         justRemove();
     }
+})
+
+app.get("/login",(req,res)=>{
+    res.render("login")
+})
+app.post("/login",(req,res)=>{
+    var pass=req.body.pass
+    console.log(pass)
+    var auth= async function(){
+        try{
+            var data=await main.findOne({pass:pass})
+            if(data==null||data==undefined||!data){
+                res.render("login",{
+                    message:"wrong password",
+                    status:false
+                })
+            }
+            else{
+
+            }
+            
+        }
+        catch(e){
+            console.log(e)
+        }
+    };
+    auth()
 })
 //LISTENING APP
 app.listen(port, ()=>{
