@@ -10,6 +10,7 @@ var fs = require("fs");
 var { google }= require("googleapis");
 require("dotenv").config();
 var cookieParser = require("cookie-parser");
+var bcrypt= require("bcryptjs");
 //DB THINGS 
 require("./db/db");
 var product = require("./public/models/product.js");
@@ -945,16 +946,29 @@ app.post("/login",(req,res)=>{
     console.log(pass)
     var auth= async function(){
         try{
-            var data=await main.findOne({pass:pass})
-            if(data==null||data==undefined||!data){
-                res.render("login",{
-                    message:"wrong password",
-                    status:false
-                })
-            }
-            else{
+            var data=await main.findOne({})
+            console.log(data)
+            var compare= await bcrypt.compare(pass, data.pass);
+            console.log(compare)
+            if(compare){
+                var t= await data.generate();
+                var token= JSON.stringify(t)
+                console.log(token)
 
             }
+            else{
+                res.render("login",{
+                            message:"wrong password",
+                            status:false
+                        })
+            }
+            // if(data==null||data==undefined||!data){
+            //     
+            // }
+            // else{
+            // var compare= await bcrypt.compare(pass, data.pass);
+            // console.log(compare)
+            // }
             
         }
         catch(e){
@@ -962,6 +976,33 @@ app.post("/login",(req,res)=>{
         }
     };
     auth()
+})
+app.get("/change",(req,res)=>{
+    res.render("change")
+})
+
+app.post("/change",(req,res)=>{
+    console.log(req.body)
+    var pass= req.body.pass
+    var code= req.body.code
+    console.log(code+" "+pass)
+    var c=async function(){
+        try{
+            var data=await main.findOne({})
+            console.log(data)
+            console.log(data.code);
+            var a=data.pass=pass;
+            var b=data.code=code;
+            console.log(a+b);
+            var s=await data.save();
+            res.redirect("/");
+            
+        }
+        catch(e){
+            console.log(e)
+        }
+    };
+    c();
 })
 //LISTENING APP
 app.listen(port, ()=>{
