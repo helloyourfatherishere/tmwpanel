@@ -46,3 +46,6 @@
 .btn>button:hover, .btn>button:active, .btn>button:focus{
     background-color: #000080;
 }
+.val{
+    text-transform: capitalize;
+}
