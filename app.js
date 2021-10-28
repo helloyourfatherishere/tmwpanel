@@ -1126,6 +1126,12 @@ app.get("/change/:status",(req,res)=>{
         })
     }
     else if(status=="code"){
+        
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
         res.render("change",{
             head:"Change Security Code",
             message:"Enter Your Password",
@@ -1133,6 +1139,7 @@ app.get("/change/:status",(req,res)=>{
             placeholder:"Password",
             status:"code"
         })
+    }
     }
     else{
         res.redirect("/error")
