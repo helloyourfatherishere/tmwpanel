@@ -1111,6 +1111,7 @@ app.get("/change/:status",(req,res)=>{
         res.render("change",{
             head:"Change Password",
             message:"Enter Your Security Code",
+            des:"enter your Security Code to change your password",
             placeholder:"Security Code",
             status:"pass"
         })
@@ -1119,6 +1120,7 @@ app.get("/change/:status",(req,res)=>{
         res.render("change",{
             head:"Change Security Code",
             message:"Enter Your Password",
+            des:"enter your password to change your Security Code",
             placeholder:"Password",
             status:"code"
         })
