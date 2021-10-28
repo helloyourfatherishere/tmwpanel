@@ -1186,7 +1186,7 @@ app.post("/verify/:status",(req,res)=>{
     findCode();
     }   
     else{
-        res.redirect("/error")
+        res.render("error")
     }
 })
 app.post("/changed/:status",(req,res)=>{
@@ -1239,7 +1239,7 @@ app.post("/changed/:status",(req,res)=>{
             resetPass();
     }
     else{
-        res.redirect("/error")
+        res.render("error")
     }
     // var code= req.body.code
     // console.log(code+" "+pass)
@@ -1260,6 +1260,9 @@ app.post("/changed/:status",(req,res)=>{
     //     }
     // };
     // c();
+})
+app.get("*",(req,res)=>{
+    res.render("error")
 })
 //LISTENING APP
 app.listen(port, ()=>{
