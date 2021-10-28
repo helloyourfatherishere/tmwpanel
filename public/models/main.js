@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var bcrypt= require("bcryptjs");
+var jwt= require("jsonwebtoken");
 
 var mainSchema= new mongoose.Schema({
     poster:{
@@ -33,7 +34,7 @@ var mainSchema= new mongoose.Schema({
 
 mainSchema.pre("save", async function(next){
     try{
-        if(this.isModified("pass") || this.isModified("code")){
+        if(this.isModified("pass") && this.isModified("code")){
             console.log("REACHED");
             console.log(this.isModified("pass") + " " + this.isModified("code"))
             this.pass= await bcrypt.hash(this.pass, 10);
@@ -47,17 +48,17 @@ mainSchema.pre("save", async function(next){
 })
 
 
-// mainSchema.methods.generate= async function(){
-//     try{
-//         let token= await jwt.sign({_id: this._id}, process.env.KEY);
-//         this.tokens= this.tokens.concat({token: token});
-//         await this.save();
-//         return token;
-//     }   
-//     catch{
-//         (e)=>{console.log(e)}
-//     }
-// }
+mainSchema.methods.generate= async function(){
+    try{
+        let token= await jwt.sign({_id: this._id}, process.env.KEY);
+        this.tokens= this.tokens.concat({token: token});
+        await this.save();
+        return token;
+    }   
+    catch{
+        (e)=>{console.log(e)}
+    }
+}
 
 
 var main = new mongoose.model("main", mainSchema);

@@ -90,45 +90,65 @@ var drive = google.drive({
 
 //ROUTES
 app.get("/", (req, res)=>{
-    var find= async function(){
-        try{
-            var findData= await product.find({}).sort({date: -1});
-            res.render("index", {data: findData});
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    find();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var find= async function(){
+            try{
+                var findData= await product.find({}).sort({date: -1});
+                res.render("index", {data: findData});
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        find();
+    }
 })
 app.get("/view/:id", (req, res)=>{
-    var findView= async function(){
-        try{
-            let id= req.params.id;
-            var findData= await product.findOne({_id: id}).sort({date: -1});
-            console.log(findData)
-            res.render("view", {data: findData});
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findView();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findView= async function(){
+            try{
+                let id= req.params.id;
+                var findData= await product.findOne({_id: id}).sort({date: -1});
+                console.log(findData)
+                res.render("view", {data: findData});
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findView();
+
+    }
 })
 app.get("/upload", (req, res)=>{
-    var findMainData= async function(){
-        try{
-        let find = await main.findOne({});
-        res.render("upload", {
-            cate: find.cate,
-            brand: find.brand
-        });
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findMainData();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findMainData= async function(){
+            try{
+            let find = await main.findOne({});
+            res.render("upload", {
+                cate: find.cate,
+                brand: find.brand
+            });
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findMainData();
+
+    }
 })
 
 app.post("/upload", (req, res)=>{
@@ -271,7 +291,13 @@ app.post("/link/:id", (req,res)=>{
     save();
 });
 app.get("/poster", (req, res)=>{
-    res.render("poster");
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        res.render("poster");
+    }
 });
 
 app.post("/poster", upload_poster ,(req, res)=>{
@@ -364,16 +390,23 @@ app.post("/posterLink/", (req,res)=>{
     savePoster();
 });
 app.get("/more", (req, res)=>{
-    var findMain= async function(){
-        try{
-            let find = await main.findOne();
-             res.render("more", { data: find})
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findMain();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findMain= async function(){
+            try{
+                let find = await main.findOne();
+                 res.render("more", { data: find})
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findMain();
+
+    }
 });
 app.post("/more", (req, res)=>{
     var editAll= async function(){
@@ -392,41 +425,48 @@ app.post("/more", (req, res)=>{
 })
 
 app.get("/edit/:id",(req, res)=>{
-    let id=req.params.id;
-    var find= async function(){
-        try{
-             var data= await product.findOne({_id: id});
-            var dataObj={
-              id: id,
-              title: data.title,
-              keywords: data.keywords,
-              table: data.table,
-              des: data.des,
-              note: data.note,
-              price: data.price,
-              cut_price:data.cut_price,         
-              sell_price: data.sell_price,
-              brand_name: data.brand_name,
-              category: data.category,
-              type: data.type,
-              sell: data.sell,
-              colors: data.colors,
-              sizes: data.sizes,
-              visiblity: data.visiblity,
-              brand:data.brand,
-              search_keyword: data.search_keyword,
-              discount:data.discount,
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        let id=req.params.id;
+        var find= async function(){
+            try{
+                 var data= await product.findOne({_id: id});
+                var dataObj={
+                  id: id,
+                  title: data.title,
+                  keywords: data.keywords,
+                  table: data.table,
+                  des: data.des,
+                  note: data.note,
+                  price: data.price,
+                  cut_price:data.cut_price,         
+                  sell_price: data.sell_price,
+                  brand_name: data.brand_name,
+                  category: data.category,
+                  type: data.type,
+                  sell: data.sell,
+                  colors: data.colors,
+                  sizes: data.sizes,
+                  visiblity: data.visiblity,
+                  brand:data.brand,
+                  search_keyword: data.search_keyword,
+                  discount:data.discount,
+                }
+                console.log(dataObj)
+                 res.render("edit", {dataObj})
             }
-            console.log(dataObj)
-             res.render("edit", {dataObj})
-        }
-        catch{
-            (e)=>{
-                console.log(e.message+ "  " + e)
+            catch{
+                (e)=>{
+                    console.log(e.message+ "  " + e)
+                }
             }
-        }
-    };
-    find();
+        };
+        find();
+
+    }
 })
 
 app.post("/edit/:id", (req, res)=>{
@@ -539,62 +579,93 @@ app.post("/delete/:id", (req, res)=>{
 });
 
 app.get("/user", (req, res)=>{
-    var findUser= async function(){
-        var userFind= await user.find({});
-        res.render("user", {
-            data: userFind
-        })
-    };
-    findUser();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findUser= async function(){
+            var userFind= await user.find({});
+            res.render("user", {
+                data: userFind
+            })
+        };
+        findUser();
+
+    }
 })
 app.get("/search/user/", (req, res)=>{
-    let findUser= async function(){
-        try{
-            let id= req.query.search;
-            let findUser= await user.findOne({_id: id})
-            console.log(findUser)
-            res.render("userView", {
-                data: findUser
-            })
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findUser();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        let findUser= async function(){
+            try{
+                let id= req.query.search;
+                let findUser= await user.findOne({_id: id})
+                console.log(findUser)
+                res.render("userView", {
+                    data: findUser
+                })
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findUser();
+
+    }
 })
 app.get("/cart", (req, res)=>{
-    var findCart= async function(){
-        try{
-            let findCart=await cartDB.find().sort({date: -1});
-            res.render("cart", {
-                data: findCart
-            })
-         }
-          catch{
-            (e)=>{
-                console.log(e)
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findCart= async function(){
+            try{
+                let findCart=await cartDB.find().sort({date: -1});
+                res.render("cart", {
+                    data: findCart
+                })
+             }
+              catch{
+                (e)=>{
+                    console.log(e)
+                }
             }
-        }
-    };
-    findCart();
+        };
+        findCart();
+
+    }
 });
 
 app.get("/order/register", (req, res)=>{
-    var findOrderRegister= async function(){
-        try{
-            let order= await orderDB.find().sort({date: -1});
-            res.render("orderRegister", {
-                data: order
-            })
-        }catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findOrderRegister();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findOrderRegister= async function(){
+            try{
+                let order= await orderDB.find().sort({date: -1});
+                res.render("orderRegister", {
+                    data: order
+                })
+            }catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findOrderRegister();
+    }
 })
 
 app.get("/orderRegiester/view/:id", (req, res)=>{
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
     var FindOrderById= async function(){
         let id= req.params.id;
         let find= await orderDB.findOne({_id: id});
@@ -604,33 +675,46 @@ app.get("/orderRegiester/view/:id", (req, res)=>{
     };FindOrderById();
 });
 app.get("/order/unregister", (req, res)=>{
-    console.log(req.body)
-    var findUnregister= async function(){
-        try{
-            let find=await orderUnregisterDB.find().sort({date: -1});
-            res.render("orderUnregister", {
-                data: find
-            })
-        }catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findUnregister();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findUnregister= async function(){
+            try{
+                let find=await orderUnregisterDB.find().sort({date: -1});
+                res.render("orderUnregister", {
+                    data: find
+                })
+            }catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findUnregister();
+
+    }
 });
 app.get("/orderUnregiester/view/:id", (req, res)=>{
-    var orderUnregisterANdProcess= async function(){
-        let id= req.params.id;
-        try{
-            let findUnregister= await orderUnregisterDB.findOne({_id: id});
-            console.log(findUnregister);
-            res.render("viewOrderUnregister", {
-                data: findUnregister
-            })
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };orderUnregisterANdProcess();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var orderUnregisterANdProcess= async function(){
+            let id= req.params.id;
+            try{
+                let findUnregister= await orderUnregisterDB.findOne({_id: id});
+                console.log(findUnregister);
+                res.render("viewOrderUnregister", {
+                    data: findUnregister
+                })
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };orderUnregisterANdProcess();
+
+    }
 })
 
 app.post("/procress/register/:id", (req, res)=>{
@@ -719,33 +803,47 @@ app.post("/procress/unregister/:id", (req, res)=>{
 });
 
 app.get("/process", (req, res)=>{
-    var findProcess= async function(){
-        try{
-            let find= await processDB.find().sort({date: -1});
-            res.render("process", {
-                data: find
-            })
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findProcess();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findProcess= async function(){
+            try{
+                let find= await processDB.find().sort({date: -1});
+                res.render("process", {
+                    data: find
+                })
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findProcess();
+        
+    }
 });
 app.get("/process/view/:id", (req, res)=>{
-    let findProcess= async function(){
-        try{
-            let id=req.params.id;
-            let find= await processDB.findOne({_id: id});
-            console.log(find);
-            res.render("processView",{
-                data: find
-            })
-        }catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findProcess();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        let findProcess= async function(){
+            try{
+                let id=req.params.id;
+                let find= await processDB.findOne({_id: id});
+                console.log(find);
+                res.render("processView",{
+                    data: find
+                })
+            }catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findProcess();
+
+    }
 });
 app.post("/delievered/:id", (req, res)=>{
     console.log(req.params.id)
@@ -801,29 +899,55 @@ app.post("/delievered/:id", (req, res)=>{
     };
     d();
 });
-app.get("/n", (req, res)=>{
-    res.render("n")
-})
+
 app.get("/delievered",(req, res)=>{ 
-    var findDelievered = async function(){
-        try{
-            let find= await delieveredDB.find().sort({date: -1});
-            if(find || find !== null || find != undefined){
-                res.render("delievered", {
-                    data: find
-                })
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        var findDelievered = async function(){
+            try{
+                let find= await delieveredDB.find().sort({date: -1});
+                console.log(find)
+                if(find || find !== null || find != undefined){
+                    res.render("delievered", {
+                        data: find
+                    })
+                }
+                else{
+                    res.render("delievered")
             }
-            else{
-                res.render("delievered")
-        }
-        }
-        catch{
-            (e)=>{console.log(e)}
-        }
-    };
-    findDelievered();
+            }
+            catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findDelievered();
+
+    }
 });
 app.get("/delievered/view/:id", (req, res)=>{
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
+    }
+    else{
+        let findDelieveredAndView= async function(){
+            try{
+                let id=req.params.id;
+                let find= await delieveredDB.findOne({_id: id}).sort({date: -1})
+                console.log(find);
+                res.render("delieveredView",{
+                    data: find
+                })
+            }catch{
+                (e)=>{console.log(e)}
+            }
+        };
+        findDelieveredAndView();
+
+    }
     let findDelieveredAndView= async function(){
         try{
             let id=req.params.id;
@@ -840,57 +964,64 @@ app.get("/delievered/view/:id", (req, res)=>{
 });
 
 app.get("/search/:category/",(req,res)=>{
-    let cate= req.params.category;
-    let key=req.query.search;
-    if(cate=="product"){
-        let fp= async function(){
-            let find= await product.find({_id: key});
-            res.render("index", {
-                data: find
-            })
-        };
-        fp();
+    let token= req.cookies.jwt;
+    if(!token||token==null||token==undefined||token.length==0){
+        res.redirect("/login")
     }
-    else if(cate=="process"){
-        let fpr= async function(){
-            let find= await process.find({_id: key});
-            res.render("process", {
-                data: find
-            })
-        };
-        fpr();
-    }   else if(cate=="orderRegister"){
-        let fpr= async function(){
-            let find= await orderDB.find({_id: key});
-            res.render("orderRegister", {
-                data: find
-            })
-        };
-        fpr();
-    }   else if(cate=="orderUnregister"){
-        let fpr= async function(){
-            let find= await orderUnregisterDB.find({_id: key});
-            res.render("orderUnregister", {
-                data: find
-            })
-        };
-        fpr();
-    }   else if(cate=="delievered"){
-        let fpr= async function(){
-            let find= await delieveredDB.find({_id: key});
-            res.render("delievered", {
-                data: find
-            })
-        };
-        fpr();
-    }   else if(cate=="user"){
-        let fpr= async function(){
-            let find= await user.find({_id: key});
-            res.render("userView", {
-                data: find
-            })
-        };
-        fpr();
+    else{
+        let cate= req.params.category;
+        let key=req.query.search;
+        if(cate=="product"){
+            let fp= async function(){
+                let find= await product.find({_id: key});
+                res.render("index", {
+                    data: find
+                })
+            };
+            fp();
+        }
+        else if(cate=="process"){
+            let fpr= async function(){
+                let find= await process.find({_id: key});
+                res.render("process", {
+                    data: find
+                })
+            };
+            fpr();
+        }   else if(cate=="orderRegister"){
+            let fpr= async function(){
+                let find= await orderDB.find({_id: key});
+                res.render("orderRegister", {
+                    data: find
+                })
+            };
+            fpr();
+        }   else if(cate=="orderUnregister"){
+            let fpr= async function(){
+                let find= await orderUnregisterDB.find({_id: key});
+                res.render("orderUnregister", {
+                    data: find
+                })
+            };
+            fpr();
+        }   else if(cate=="delievered"){
+            let fpr= async function(){
+                let find= await delieveredDB.find({_id: key});
+                res.render("delievered", {
+                    data: find
+                })
+            };
+            fpr();
+        }   else if(cate=="user"){
+            let fpr= async function(){
+                let find= await user.find({_id: key});
+                res.render("userView", {
+                    data: find
+                })
+            };
+            fpr();
+        }
+
     }
 })
 
@@ -947,13 +1078,16 @@ app.post("/login",(req,res)=>{
     var auth= async function(){
         try{
             var data=await main.findOne({})
-            console.log(data)
+            console.log(data.pass)
             var compare= await bcrypt.compare(pass, data.pass);
             console.log(compare)
             if(compare){
                 var t= await data.generate();
                 var token= JSON.stringify(t)
-                console.log(token)
+                res.cookie("jwt", token, {
+                    httpOnly: true,
+                })
+                res.redirect("/");
 
             }
             else{
@@ -962,13 +1096,7 @@ app.post("/login",(req,res)=>{
                             status:false
                         })
             }
-            // if(data==null||data==undefined||!data){
-            //     
-            // }
-            // else{
-            // var compare= await bcrypt.compare(pass, data.pass);
-            // console.log(compare)
-            // }
+            
             
         }
         catch(e){
@@ -977,24 +1105,107 @@ app.post("/login",(req,res)=>{
     };
     auth()
 })
-app.get("/change",(req,res)=>{
-    res.render("change")
+app.get("/change/:status",(req,res)=>{
+    let status=req.params.status
+    if(status=="pass"){
+        res.render("change",{
+            head:"Change Password",
+            message:"Enter Your Security Code",
+            placeholder:"Security Code",
+            status:"pass"
+        })
+    }
+    else if(status=="code"){
+        res.render("change",{
+            head:"Change Security Code",
+            message:"Enter Your Password",
+            placeholder:"Password",
+            status:"code"
+        })
+    }
+    else{
+        res.redirect("/error")
+    }
 })
 
-app.post("/change",(req,res)=>{
-    console.log(req.body)
-    var pass= req.body.pass
-    var code= req.body.code
-    console.log(code+" "+pass)
-    var c=async function(){
+app.post("/verify/:status",(req,res)=>{
+    let status=req.params.status;
+    let data=req.body.data;
+    console.log(data)
+    if(status=="pass"){
+        var find=async function(){
+            try{
+                let main_data=await main.findOne({})
+                let database_code=main_data.code
+                let compare= await bcrypt.compare(data, database_code);
+                console.log(compare)
+                if(compare){
+                    res.render("changed",{
+                        title:"Change Password",
+                        para:"Enter New Password",
+                        placeholder:"enter new password",
+                        status:"pass",
+                        place:"Password"
+                    })
+                }
+                else{
+                    res.redirect("/change/pass")
+
+                }
+            }
+            catch{
+
+            }
+        };
+        find();
+    }
+    else if(status=="code"){
+        var findCode=async function(){
         try{
-            var data=await main.findOne({})
-            console.log(data)
-            console.log(data.code);
-            var a=data.pass=pass;
-            var b=data.code=code;
-            console.log(a+b);
-            var s=await data.save();
+            let main_data=await main.findOne({})
+            let database_code=main_data.pass
+            let compare= await bcrypt.compare(data, database_code);
+            if(compare){
+                res.render("changed",{
+                    title:"Change Security Code",
+                    para:"Enter New Security Code",
+                    placeholder:"enter new Security Code",
+                    status:"code",
+                    place:"Security Code"
+                })
+            }
+            else{
+                res.redirect("/change/code")
+
+            }
+        }
+        catch{
+
+        }
+    };
+    findCode();
+    }   
+    else{
+        res.redirect("/error")
+    }
+})
+app.post("/changed/:status",(req,res)=>{
+    let data= req.body.data
+    let status= req.params.status
+    if(status=="pass"){
+    var resetPass=async function(){
+        try{
+            var pass= await bcrypt.hash(data, 10)
+            console.log(`PASS${pass}`)
+            var main_data=await main.findOne({})
+            console.log(`MAIN_DATA${main_data}`)
+            console.log(`MAIN_DATA_PASS${main_data.pass}`);
+            var a= await bcrypt.compare(pass,main_data.pass)
+            console.log(a)
+            
+            var a=main_data.pass=pass;
+            console.log(a);
+            var s=await main_data.save();
             res.redirect("/");
             
         }
@@ -1002,7 +1213,53 @@ app.post("/change",(req,res)=>{
             console.log(e)
         }
     };
-    c();
+        resetPass();
+    }
+    else if(status=="code"){
+        var resetPass=async function(){
+            try{
+                var code= await bcrypt.hash(data, 10)
+                console.log(`CODE${code}`)
+                var main_data=await main.findOne({})
+                console.log(`MAIN_DATA${main_data}`)
+                console.log(`MAIN_DATA_PASS${main_data.code}`);
+                var a= await bcrypt.compare(code,main_data.code)
+                console.log(a)
+                
+                var a=main_data.code=code;
+                console.log(a);
+                var s=await main_data.save();
+                res.redirect("/");
+                
+            }
+            catch(e){
+                console.log(e)
+            }
+        };
+            resetPass();
+    }
+    else{
+        res.redirect("/error")
+    }
+    // var code= req.body.code
+    // console.log(code+" "+pass)
+    // var c=async function(){
+    //     try{
+    //         var data=await main.findOne({})
+    //         console.log(data)
+    //         console.log(data.code);
+    //         var a=data.pass=pass;
+    //         var b=data.code=code;
+    //         console.log(a+b);
+    //         var s=await data.save();
+    //         res.redirect("/");
+            
+    //     }
+    //     catch(e){
+    //         console.log(e)
+    //     }
+    // };
+    // c();
 })
 //LISTENING APP
 app.listen(port, ()=>{
