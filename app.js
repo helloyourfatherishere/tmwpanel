@@ -51,7 +51,7 @@ hbs.registerHelper("cate", function(val){
     var d=val[0];
     var data=d.split(",");
     var a=data.map((val)=>{
-        return(`<option value=${val+"s"} class="val">${val}</option>`)
+        return(`<option value=${val} class="val">${val}</option>`)
     })
     return(a)
 })
