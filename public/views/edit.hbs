@@ -41,16 +41,8 @@
             BRAND NAME: <input type="text" placeholder="brand name: denim..." name="brand_name" value="{{dataObj.brand_name}}" id="brand_name"><br>
 
             CATEGORY<select id="category" name="category" value={{dataObj.category}}>
-                <option value="pants">PANTS</option>
-                <option value="shirts">SHIRTS</option>
-                <option value="t-shirts">T-SHIRTS</option>
-                <option value="jackets">JACKETS</option>
-                <option value="hoodies">HOODDIES</option>
-                <option value="trouser">TROUSER</option>
-                <option value="shalwar-kameez">SHALWAR KAMEEZ</option>
-                <option value="ladies-kurti">LADIES KURTI</option>
-                <option value="collections">COLLECTION</option>
-                <option value="undergarments">UNDERGARMENTS</option>
+                {{#cate cate}}
+                 {{/cate}}
             </select><br>
 
             TYPE <select id="type" name="type"  value={{dataObj.type}}>
