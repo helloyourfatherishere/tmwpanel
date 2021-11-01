@@ -48,6 +48,7 @@ hbs.registerHelper("total", function(price, quantity){
 })
 
 hbs.registerHelper("cate", function(val){
+    console.log(val)
     var d=val[0];
     var data=d.split(",");
     var a=data.map((val)=>{
@@ -463,6 +464,7 @@ app.get("/edit/:id",(req, res)=>{
                   brand:data.brand,
                   search_keyword: data.search_keyword,
                   discount:data.discount,
+                  cate:data.cate
                 }
                 console.log(dataObj)
                  res.render("edit", {dataObj})
