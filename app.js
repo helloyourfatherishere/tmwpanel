@@ -195,6 +195,7 @@ app.post("/upload", (req, res)=>{
                 table: tab,
                 des: d,
                 note: n,
+                images:[]
             })
             var data = await upload.save();
             res.render("upload_pics", {id: data._id})
