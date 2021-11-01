@@ -444,6 +444,8 @@ app.get("/edit/:id",(req, res)=>{
         var find= async function(){
             try{
                  var data= await product.findOne({_id: id});
+                 var findMain= await main.findOneAndUpdate({});
+                 var cate=findMain.cate;
                 var dataObj={
                   id: id,
                   title: data.title,
@@ -464,10 +466,8 @@ app.get("/edit/:id",(req, res)=>{
                   brand:data.brand,
                   search_keyword: data.search_keyword,
                   discount:data.discount,
-                  cate:data.cate
                 }
-                console.log(dataObj)
-                 res.render("edit", {dataObj})
+                 res.render("edit", {dataObj,cate})
             }
             catch{
                 (e)=>{
