@@ -1284,6 +1284,22 @@ app.post("/changed/:status",(req,res)=>{
     // };
     // c();
 })
+
+app.get("/feed", (req, res)=>{
+    var findFeed= async function(){
+        try{
+            let data= await feed.find();
+            res.render("feed", {
+                data: data
+            })
+        }
+        catch{
+            (e)=>{console.log(e)}
+        }
+    };
+    findFeed();
+})
+
 app.get("*",(req,res)=>{
     res.render("error")
 })
