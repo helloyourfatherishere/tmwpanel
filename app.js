@@ -90,9 +90,11 @@ var oauth2client= new google.auth.OAuth2(
     CLIENT_SECRET,
     REDIRECT_URI
 )
-oauth2client.setCredentials({
+console.log(`AUTH ${oauth2client}`)
+var a= oauth2client.setCredentials({
     refresh_token: REFRESH_TOKEN
 })
+console.log(`A ${a}`)
 var drive = google.drive({
     version: "v3",
     auth: oauth2client
