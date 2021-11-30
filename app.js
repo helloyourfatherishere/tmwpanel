@@ -21,7 +21,7 @@ var orderUnregisterDB= require("./public/models/orderUnregister.js")
 var processDB=require("./public/models/process.js")
 var delieveredDB=require("./public/models/delievered.js");
 var main= require("./public/models/main.js");
-
+var feed= require("./public/models/feed.js");
 
 //LOCAL VARIABLES
 var public_path= path.join(__dirname,"/public/views")
@@ -1290,7 +1290,9 @@ app.post("/changed/:status",(req,res)=>{
 app.get("/feed", (req, res)=>{
     var findFeed= async function(){
         try{
-            let data= await feed.find();
+            console.log("Asdasd")
+            let data= await feed.find({});
+            console.log(data)
             res.render("feed", {
                 data: data
             })
