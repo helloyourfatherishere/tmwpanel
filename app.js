@@ -169,7 +169,6 @@ app.post("/upload", (req, res)=>{
     async function upload(){
         try{
             console.log("REACHED");
-            let tab = table.split(";");
             let t= title.toLowerCase();
             let d= des.toLowerCase();
             let n= note.toLowerCase();
@@ -194,7 +193,7 @@ app.post("/upload", (req, res)=>{
                 sizes: siz,
                 search_keyword: s,
                 keywords: k,
-                table: tab,
+                table: table,
                 des: d,
                 note: n,
                 images:[]
