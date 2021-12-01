@@ -494,7 +494,7 @@ app.post("/edit/:id", (req, res)=>{
             let k=data.keywords.toLowerCase();
             let colors= data.colors.toLowerCase();
             let sizes= data.sizes.toLowerCase();
-            let tab = data.table.split(";");
+            let tab = data.table;
             var data_obj= {
             title: t,
             price: data.price,
