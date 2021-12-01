@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 
 var feedSchema= new mongoose.Schema({  
     email:{
-        type: Object
+        type: String
     },
     message: {
         type: String

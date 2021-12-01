@@ -39,7 +39,7 @@ var product_Schema= new mongoose.Schema({
     brand_name:{
         type: String,
         default: "null",
-        lowecase: true,
+        lowercase: true,
     },
     colors:{
         type: String,
@@ -59,7 +59,7 @@ var product_Schema= new mongoose.Schema({
     },
     type:{
         type: String,
-        lowecase: true
+        lowercase: true
     },
     colors:{
         type: String,
@@ -71,11 +71,11 @@ var product_Schema= new mongoose.Schema({
     },
     keywords:{
         type: String,
-        lowecase: true,
+        lowercase: true,
     },
     table:{
         type: Object,
-        lowecase: true,
+        lowercase: true,
     },
     date:{
         type: Date,
