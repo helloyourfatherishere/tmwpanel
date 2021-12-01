@@ -44,7 +44,7 @@ hbs.registerHelper("index_plus", function(val){
     return(val+1)
 })
 hbs.registerHelper("total", function(price, quantity){
-    return(price*quantity)
+    return(parseInt(price) *parseInt(quantity))
 })
 
 hbs.registerHelper("cate", function(val){
@@ -731,7 +731,7 @@ app.get("/orderUnregiester/view/:id", (req, res)=>{
     }
 })
 
-app.post("/procress/register/:id", (req, res)=>{
+app.post("/process/register/:id", (req, res)=>{
     var findOrderAndProcess= async function(){
         let i=req.params.id;
         let id= i.toString()
@@ -769,7 +769,7 @@ app.post("/procress/register/:id", (req, res)=>{
     };
     findOrderAndProcess();
 });
-app.post("/procress/unregister/:id", (req, res)=>{
+app.post("/process/unregister/:id/:p_id", (req, res)=>{
     var findUnregisterOrderAndProcess= async function(){
         try{    
             let id= req.params.id
@@ -784,19 +784,17 @@ app.post("/procress/unregister/:id", (req, res)=>{
                  whatsapp: findOrder.whatsapp,
                  address: findOrder.address
             };
-            console.log(userDetail);
             let o= {
                 id: findOrder._id,
+                p_id:req.params.p_id,
                 img: findOrder.img,
                 title: findOrder.title,
-                price: findOrder.findOrder,
+                price: findOrder.price,
                 quantity: findOrder.quantity,
                 colors: findOrder.colors,
                 sizes: findOrder.sizes,
                 message: findOrder.message
             };
-            console.log(`ORDER DETAILS : ${o.id} ${o.img} ${o.title}`);
-
             let process= new processDB({
                 _id: findOrder._id,
                 paymentMethod: findOrder.paymentMethod,
@@ -828,6 +826,7 @@ app.get("/process", (req, res)=>{
                 res.render("process", {
                     data: find
                 })
+                console.log(find)
             }
             catch{
                 (e)=>{console.log(e)}
@@ -868,6 +867,7 @@ app.post("/delievered/:id", (req, res)=>{
                 new: true, useFindAndModify: false
             });
             console.log(`FIND PROCES ${findProcess}`)
+            console.log(`FIND PROCES ${findProcess.orderDetails}`)
             let delievered= new delieveredDB({
                 _id: findProcess._id,
                 userId: findProcess.userDetails.id,

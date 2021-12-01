@@ -40,7 +40,9 @@
             <div id="orders">
                 <fieldset class="orders">
                     <legend>Order Details</legend>
+                    {{data}}
                     {{#each data.orderDetails}}
+                    {{this}}
                     <a href="https://tmwords.netlify.app/view/{{this.id}}" target="blank" style="color: black; text-decoration: none;">
                         <div class="order">
                             <div class="img">
@@ -68,7 +70,7 @@
             </div>
             
             <div class="btn_div">
-                <form action="/procress/register/{{data._id}}" method="post">
+                <form action="/process/register/{{data._id}}" method="post">
                     <button type="submit" class="submit_btn" >DELIVER</button>
                 </form>
             </div>
